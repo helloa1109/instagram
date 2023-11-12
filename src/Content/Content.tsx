@@ -48,11 +48,10 @@ const ContentDiv = styled.div`
   height: 576px;
   margin-top: 20px;
   overflow-y: auto;
-  /* border: 1px solid red; */
 `;
 
 const ContentUser = styled.div`
-  width: 390px;
+  width: 350px;
   height: 4vh;
   display: flex;
   align-items: center;
@@ -60,7 +59,7 @@ const ContentUser = styled.div`
   padding: 10px;
   margin-left: 4px;
   .MoreIcon{
-    margin-right: 40px;
+    margin-right: 10px;
     cursor: pointer;
   }
 `;
