@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import p1 from '../photo/pic.jpg';
 import p2 from '../photo/p2.jpeg';
 import p3 from "../photo/p3.jpg";
@@ -13,7 +13,7 @@ interface StoryItemProps {
 }
 
 interface SelectedProps {
-  isSelected: boolean;
+  isClicked: boolean;
 }
 
 const Story = () => {
@@ -43,12 +43,13 @@ const StoryItemWrapper = styled.div<SelectedProps>`
   align-items: center;
   margin-right: 14px;
   cursor: pointer;
+  border: ${(props) => (props.isClicked ? 'none' : '2px solid transparent')};
 `;
 
 const StoryImage = styled.img<SelectedProps>`
   width: 60px;
   height: 60px;
-  border: ${(props) => (props.isSelected ? 'none' : '2px solid transparent')};
+  border: ${(props) => (props.isClicked ? 'none' : '2px solid transparent')};
   border-radius: 50%;
   background-image: linear-gradient(#fff, #fff),
     linear-gradient(to right, #fcb045, #fd1d1d, #833ab4);
@@ -97,52 +98,93 @@ const FullStoryImg = styled.img`
   width: 50px;
   height: 50px;
   border-radius: 50px;
-  margin-right: 8px; 
+  margin-right: 10px;
 `;
 
 const FullStoryText = styled.span`
   font-size: 16px;
 `;
 
-const StoryLoading = styled.div`
+const StoryLoading = styled.div<{ fillPercentage: number }>`
   position: absolute;
   top: 0;
-  width: 99%;
-  border: 2px solid #ccc;
+  left: 0;
+  width: ${(props) => props.fillPercentage}%;
+  height: 4px;
+  background: #ccc;
+  transition: width 5s linear;  
+`;
+
+const CloseIcon = styled(FontAwesomeIcon)`
+  color: white;
+  cursor: pointer;
 `;
 
 const StoryItem = ({ userNickname, userStory }: StoryItemProps) => {
   const [isSelected, setIsSelected] = useState(false);
+  const [isClicked, setIsClicked] = useState(false);
+  const [fillPercentage, setFillPercentage] = useState(0);
 
-  const handleClick = () => {
+  const openModal = () => {
     setIsSelected(true);
+    setIsClicked(true);
+    setFillPercentage(0);
   };
 
-  const handleClose = () => {
+  const closeModal = () => {
     setIsSelected(false);
   };
 
+  useEffect(() => {
+    let timer: NodeJS.Timeout;
+    let increment = 1;
+    const interval = 5;
+
+    const updateFillPercentage = () => {
+      setFillPercentage((prevPercentage) => {
+        const newPercentage = prevPercentage + increment;
+        return newPercentage <= 100 ? newPercentage : 100;
+      });
+    };
+
+    if (isSelected) {
+      timer = setInterval(() => {
+        updateFillPercentage();
+      }, interval);
+    }
+
+    return () => {
+      clearInterval(timer);
+      setTimeout(() => {
+        closeModal();
+      }, 5000);
+    };
+  }, [isSelected]);
+
   return (
     <>
-      <StoryItemWrapper isSelected={isSelected} onClick={handleClick}>
-        <StoryImage src={userStory} alt={`${userNickname}'s story`} isSelected={isSelected} />
+      <StoryItemWrapper isClicked={isClicked} onClick={openModal}>
+        <StoryImage src={userStory} alt={`${userNickname}'s story`} isClicked={isClicked} />
         <UserNick>{userNickname}</UserNick>
       </StoryItemWrapper>
 
       {isSelected && (
         <FullscreenOverlay>
-          <StoryLoading />
+          <StoryLoading fillPercentage={fillPercentage} />
           <FullStoryInfo>
-            <FullStoryImg src={userStory} />
-            <FullStoryText>{userNickname}</FullStoryText>
-            <FontAwesomeIcon icon={faXmark} style={{color: "white"}} onClick={handleClose} className='StoryClose'/>
+            <div style={{ alignItems: 'center', display: 'flex' }}>
+              <FullStoryImg src={userStory} />
+              <FullStoryText>{userNickname}</FullStoryText>
+            </div>
+            <CloseIcon icon={faXmark} onClick={closeModal} />
           </FullStoryInfo>
           <FullscreenImage src={userStory} alt={`${userNickname}'s story`} />
-          <StorySend/>
+          <StorySend />
         </FullscreenOverlay>
       )}
     </>
   );
 };
+
 
 export default Story;

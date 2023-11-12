@@ -31,8 +31,9 @@ const SendInput = styled.input`
     border-radius: 30px;
     border: 1px solid white;
     background-color: black;
+    outline: none;
 
-    ::placeholder{
+    & ::placeholder{
         color: white;
         margin-left: 4px;
     }
