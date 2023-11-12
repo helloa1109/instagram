@@ -23,10 +23,14 @@ const Send = styled.div`
     align-items: center;
     justify-content: space-around;
     z-index: 5;
+
+    .SendIcon{
+        cursor: pointer;
+    }
 `;
 
 const SendInput = styled.input`
-    width: 34vw;
+    width: 280px;
     height: 3vh;
     border-radius: 30px;
     border: 1px solid white;

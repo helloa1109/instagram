@@ -17,8 +17,8 @@ interface SelectedProps {
 }
 
 const Story = () => {
-  const userNicknames = ['이상혁', 'KDK', '판다', '다람쥐', '징동', '페이커'];
-  const userStories = [p3, p2, p2, p2, p2, p2, p2];
+  const userNicknames = ['이상혁', '리더', '판다', '다람쥐', '징동', '페이커'];
+  const userStories = [p3, p2, p1, p2, p2, p2, p2];
 
   return (
     <StoryContainer>
@@ -33,22 +33,22 @@ const StoryContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px;
   overflow-y: hidden;
+  margin-top: 10px;
 `;
 
 const StoryItemWrapper = styled.div<SelectedProps>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: 14px;
+  margin-right: 16px;
   cursor: pointer;
   border: ${(props) => (props.isClicked ? 'none' : '2px solid transparent')};
 `;
 
 const StoryImage = styled.img<SelectedProps>`
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   border: ${(props) => (props.isClicked ? 'none' : '2px solid transparent')};
   border-radius: 50%;
   background-image: linear-gradient(#fff, #fff),
@@ -66,21 +66,22 @@ const FullscreenOverlay = styled.div`
   top: 0;
   max-width: 390px;
   height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  
+
   z-index: 2;
+
 `;
 
 const FullscreenImage = styled.img`
   width: 100%;
   height: 100vh;
+  object-fit: cover;
 `;
 
 const FullStoryInfo = styled.div`
   position: absolute;
   top: 16px;
-  left: 16px;
+  
   display: flex;
   align-items: center;
   justify-content: space-between;  
@@ -102,6 +103,7 @@ const FullStoryImg = styled.img`
 `;
 
 const FullStoryText = styled.span`
+  margin-left: 10px;
   font-size: 16px;
 `;
 
@@ -118,6 +120,12 @@ const StoryLoading = styled.div<{ fillPercentage: number }>`
 const CloseIcon = styled(FontAwesomeIcon)`
   color: white;
   cursor: pointer;
+`;
+
+const StoryTime = styled.p`
+  font-size: 12px;
+  color: #ccc;
+  margin-left: 10px;
 `;
 
 const StoryItem = ({ userNickname, userStory }: StoryItemProps) => {
@@ -138,7 +146,7 @@ const StoryItem = ({ userNickname, userStory }: StoryItemProps) => {
   useEffect(() => {
     let timer: NodeJS.Timeout;
     let increment = 1;
-    const interval = 5;
+    const interval = 100;
 
     const updateFillPercentage = () => {
       setFillPercentage((prevPercentage) => {
@@ -157,7 +165,7 @@ const StoryItem = ({ userNickname, userStory }: StoryItemProps) => {
       clearInterval(timer);
       setTimeout(() => {
         closeModal();
-      }, 5000);
+      }, 15000);
     };
   }, [isSelected]);
 
@@ -175,6 +183,7 @@ const StoryItem = ({ userNickname, userStory }: StoryItemProps) => {
             <div style={{ alignItems: 'center', display: 'flex' }}>
               <FullStoryImg src={userStory} />
               <FullStoryText>{userNickname}</FullStoryText>
+              <StoryTime>44분</StoryTime>
             </div>
             <CloseIcon icon={faXmark} onClick={closeModal} />
           </FullStoryInfo>
