@@ -11,18 +11,34 @@ const Bottom = () => {
     const handleHome = () => {
         navigate("/");
     }
+
+    const handleLogin = () => {
+        if(sessionStorage.getItem("id")){
+            navigate("/mypage");
+        }else{
+            navigate("/login");
+        }
+    }
     return (
-        <BottomDiv>
-            <BottomMenu>
-                <HomeIcon onClick={handleHome} icon={faHouse} className='BottomIcon'/>
-                <CloseIcon icon={faSearch} className='BottomIcon'/>
-                <CloseIcon icon={faPlus} className='BottomIcon'/>
-                <CloseIcon icon={faVideo} className='BottomIcon'/>
-                <CloseIcon icon={faUser} className='BottomIcon'/>
-            </BottomMenu>
-        </BottomDiv>
+        <BottomCenter>
+            <BottomDiv>
+                <BottomMenu>
+                    <HomeIcon onClick={handleHome} icon={faHouse} className='BottomIcon' />
+                    <CloseIcon icon={faSearch} className='BottomIcon' />
+                    <CloseIcon icon={faPlus} className='BottomIcon' />
+                    <CloseIcon icon={faVideo} className='BottomIcon' />
+                    <CloseIcon onClick={handleLogin} icon={faUser} className='BottomIcon' />
+                </BottomMenu>
+            </BottomDiv>
+        </BottomCenter>
     )
 }
+
+const BottomCenter = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
 
 const BottomDiv = styled.div`
     position: fixed;

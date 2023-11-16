@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import StorySend from './StorySend';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import axios from "axios";
 
 interface StoryItemProps {
   userNickname: string;
@@ -16,16 +17,36 @@ interface SelectedProps {
   isClicked: boolean;
 }
 
+
 const Story = () => {
+
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    axios.get('/api/data')
+      .then((res) => {
+        setData(res.data);
+        
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
+
+  console.log("data", data);
+
   const userNicknames = ['이상혁', '리더', '판다', '다람쥐', '징동', '페이커'];
   const userStories = [p3, p2, p1, p2, p2, p2, p2];
 
   return (
+
     <StoryContainer>
+       {/* {data} */}
       {userNicknames.map((nickname, index) => (
         <StoryItem key={index} userNickname={nickname} userStory={userStories[index]} />
       ))}
     </StoryContainer>
+
   );
 };
 
@@ -66,10 +87,7 @@ const FullscreenOverlay = styled.div`
   top: 0;
   max-width: 390px;
   height: 100%;
-  
-
   z-index: 2;
-
 `;
 
 const FullscreenImage = styled.img`
@@ -172,7 +190,7 @@ const StoryItem = ({ userNickname, userStory }: StoryItemProps) => {
   return (
     <>
       <StoryItemWrapper isClicked={isClicked} onClick={openModal}>
-        <StoryImage src={userStory} alt={`${userNickname}'s story`} isClicked={isClicked} />
+        <StoryImage src={userStory} alt='stroy' isClicked={isClicked} />
         <UserNick>{userNickname}</UserNick>
       </StoryItemWrapper>
 
@@ -187,7 +205,7 @@ const StoryItem = ({ userNickname, userStory }: StoryItemProps) => {
             </div>
             <CloseIcon icon={faXmark} onClick={closeModal} />
           </FullStoryInfo>
-          <FullscreenImage src={userStory} alt={`${userNickname}'s story`} />
+          <FullscreenImage src={userStory} alt='stroy' />
           <StorySend />
         </FullscreenOverlay>
       )}

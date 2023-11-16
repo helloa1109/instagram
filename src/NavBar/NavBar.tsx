@@ -3,28 +3,44 @@ import "../Style/NavBar.scss";
 import styled from 'styled-components'
 import logo from "../photo/instagram_logo.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {faHeart, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { faHeart, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
 const NavBar = () => {
 
+    const navigate = useNavigate();
+
+    const handleChat = () => {
+        navigate("/chat");
+    }
+
     return (
-        <NavBarMain>
-            <NavLogo>
-                <InstagramLogo src={logo} alt='logo' />
-            </NavLogo>
-            <NavMenu>
-            <FontAwesomeIcon icon={faHeart} style={{color: "#050505",}} className='icon'/>
-                <FontAwesomeIcon icon={faPaperPlane} style={{color: "#000000",}}  className='icon'/>
-            </NavMenu>
-        </NavBarMain>
+        <NavBarCenter>
+            <NavBarMain>
+                <NavLogo>
+                    <InstagramLogo src={logo} alt='logo' />
+                </NavLogo>
+                <NavMenu>
+                    <FontAwesomeIcon icon={faHeart} style={{ color: "#050505", }} className='icon' />
+                    <FontAwesomeIcon icon={faPaperPlane} style={{ color: "#000000", }} className='icon'
+                    onClick={handleChat} />
+                </NavMenu>
+            </NavBarMain>
+        </NavBarCenter>
     )
 }
+
+const NavBarCenter = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
 
 const NavBarMain = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 100%;
+    width: 390px;
     height: 40px;
     padding-top: 14px;
 `;
