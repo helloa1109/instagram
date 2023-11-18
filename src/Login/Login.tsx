@@ -14,7 +14,10 @@ const Login = () => {
     const handleBack = () => {
         navigate(-1);
     }
-
+    
+    const handleSignUp = () => {
+        navigate("/signup");
+    }
     const [id, setId] = useState('');
     const [pw, setPw] = useState('');
 
@@ -37,7 +40,7 @@ const Login = () => {
                 headers: { 'Content-Type': 'application/json' }
             });
     
-            if (res.status === 200) {
+            if(res.status === 200) {
                 alert("로그인 성공!"); 
                 navigate("/");
                 sessionStorage.setItem("id",id);
@@ -59,7 +62,7 @@ return (
             <input.LoginBtn type='button' onClick={handleLogin}>로그인</input.LoginBtn>
 
         <LoginToSignUp>
-            계정이 없으신가요? <LoginToSignUpText>가입하기</LoginToSignUpText>
+            계정이 없으신가요? <LoginToSignUpText onClick={handleSignUp}>가입하기</LoginToSignUpText>
         </LoginToSignUp>
         <LoginDownloadApp>
             앱을 다운로드하세요
@@ -104,6 +107,7 @@ const LoginToSignUpText = styled.p`
     margin-left: 6px;
     color: blue;
     font-weight: 600;
+    cursor: pointer;
 `;
 
 const LoginDownloadApp = styled.p`

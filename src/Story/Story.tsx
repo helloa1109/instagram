@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import StorySend from './StorySend';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
-import axios from "axios";
 
 interface StoryItemProps {
   userNickname: string;
@@ -20,28 +19,12 @@ interface SelectedProps {
 
 const Story = () => {
 
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    axios.get('/api/data')
-      .then((res) => {
-        setData(res.data);
-        
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
-  }, []);
-
-  console.log("data", data);
-
   const userNicknames = ['이상혁', '리더', '판다', '다람쥐', '징동', '페이커'];
   const userStories = [p3, p2, p1, p2, p2, p2, p2];
 
   return (
 
     <StoryContainer>
-       {/* {data} */}
       {userNicknames.map((nickname, index) => (
         <StoryItem key={index} userNickname={nickname} userStory={userStories[index]} />
       ))}

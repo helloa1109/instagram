@@ -4,7 +4,6 @@ const app = express();
 const path = require('path');
 const { MongoClient } = require('mongodb');
 
-const jwt = require('jsonwebtoken');
 const http = require("http");
 const server = http.createServer(app);
 const { Server } = require("socket.io");
@@ -28,6 +27,23 @@ new MongoClient(url).connect().then((client) => {
     console.log(err);
 });
 
+//회원가입
+app.post('/signup', async (req, res) => {
+    const { id, pw, name } = req.body;
+
+    try{
+        const AlreadyUser = await db.collection('member').findOne({id});
+        if(AlreadyUser){
+            return res.status(409).json('이미 가입');
+        }
+
+        await db.collection('member').insertOne({id,pw,name});
+        return res.status(200).json("성공");
+    }catch(err){
+        console.log(err);
+        return res.status(500).json('실패');
+    }
+});
 
 //로그인
 app.post('/login', async (req, res) => {

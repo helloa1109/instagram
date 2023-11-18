@@ -4,6 +4,7 @@ import Layout from './LayOut/LayOut';
 import Login from './Login/Login';
 import Mypage from './Mypage/Mypage';
 import Chat from './Chat/Chat';
+import SignUp from './SignUp/SignUp';
 
 function App() {
   
@@ -15,6 +16,7 @@ function App() {
           <Route path='/login' element={<Login/>}/>
           <Route path='/mypage' element={<Mypage/>}/>
           <Route path='/chat' element={<Chat/>}/>
+          <Route path='/signup' element={<SignUp/>}/>
         </Routes>
       </div>
     </BrowserRouter>
