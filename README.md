@@ -1,6 +1,6 @@
 #기능
 
-<div aligin = 'center'>
+<div align="center">
 
 ![23.11.23](public/git/로그인.gif)
 
