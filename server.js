@@ -30,11 +30,14 @@ new MongoClient(url).connect().then((client) => {
 //회원가입
 app.post('/signup', async (req, res) => {
     const { id, pw, name } = req.body;
+    console.log(id,pw,name);
 
+    // 정보 입력 안했을때
     if (!id || !pw || !name) {
         return res.status(400).json('필수 정보를 모두 입력하세요.');
     }
 
+    // 이미 가입되어있는 아이디 확인 후 회원가입 처리
     try{
         const AlreadyUser = await db.collection('member').findOne({id});
         if(AlreadyUser){
@@ -52,11 +55,10 @@ app.post('/signup', async (req, res) => {
 //로그인
 app.post('/login', async (req, res) => {
     const { id, pw } = req.body;
-    console.log("id, pw", id, pw);
 
     const user = await db.collection('member').findOne({ id, pw });
 
-    if(!id || pw){
+    if(!id || !pw){
         return res.status(400).json("정보를 모두 입력해주세요");
     }
 
