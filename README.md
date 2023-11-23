@@ -27,11 +27,12 @@
 
 <div align="center">
 
-<img src='public/git/module1.png'>
+![Module 1](public/git/module1.png)
 
-<img src='public/git/module2.png'>
+![Module 2](public/git/module2.png)
 
-<img src='public/git/module3.png'>
+![Module 3](public/git/module3.png)
 
 </div>
+
 
