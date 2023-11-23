@@ -2,11 +2,14 @@ import React, { useState } from 'react'
 import * as Input from "../SignUp/SignUpInput";
 import * as SignUi from "../SignUp/SignUpUi";
 import { handleSignUp } from '../Apis/SignUpApi';
+import { useNavigate } from 'react-router-dom';
 const SignUpInputFiled = () => {
 
     const [id, setId] = useState('');
     const [pw, setPw] = useState('');
     const [name, setName] = useState('');
+
+    const navigate = useNavigate();
 
     const handleIdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setId(e.target.value);
@@ -22,9 +25,21 @@ const SignUpInputFiled = () => {
 
     const handleSignUpClick = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
-
-        await handleSignUp(id, pw, name);
+    
+        if (!id || !pw || !name) {
+            alert("정보를 모두 입력해주세요");
+            return; 
+        }
+    
+        try {
+            await handleSignUp(id, pw, name);
+            navigate("/login");
+        } catch (error) {
+            console.error(error);
+            alert("다시 입력해주세요");
+        }
     };
+    
 
     return (
         <SignUi.SignupForm>

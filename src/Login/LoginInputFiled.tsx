@@ -2,9 +2,13 @@ import React, { useState } from 'react'
 import * as input from "../Login/LoginInput";
 import { handleLoginApi } from "../Apis/LoginApi";
 import { styled } from 'styled-components';
+import { useNavigate } from 'react-router-dom';
+
 const LoginInputFiled = () => {
     const [id, setId] = useState('');
     const [pw, setPw] = useState('');
+
+    const navigate = useNavigate();
 
     const handleIdChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setId(e.target.value);
@@ -16,7 +20,19 @@ const LoginInputFiled = () => {
 
     const handleLogin = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
-        await handleLoginApi(id, pw);
+
+        if (!id || !pw) {
+            alert("정보를 모두 입력해주세요");
+            return;
+        }
+
+        try {
+            await handleLoginApi(id, pw);
+            navigate("/");
+        } catch (error) {
+            console.error(error);
+            alert("다시 입력해주세요");
+        }
     }
 
     return (

@@ -8,9 +8,13 @@ export const handleSignUp = async (id:string , pw:string, name:string) => {
         data: { id, pw, name },
         headers: { 'Contsent-Type': 'application/json' },
     }).then((res) => {
-        alert(res.data)
+        alert('회원가입 성공!');
     }).catch((error) => {
-        console.log(error.response.data);
-        alert(error.response.data);
+        if (error.response.status === 400) {
+            alert('필수 정보를 모두 입력하세요.');
+        } else {
+            console.error(error);
+            alert('다시 입력해주세요');
+        }
     });
 }

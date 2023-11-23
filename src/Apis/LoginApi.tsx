@@ -8,9 +8,13 @@ export const handleLoginApi = async (id:string, pw:string) => {
         data: { id, pw },
         headers: { 'Content-Type': 'application/json' }
     }).then((res) => {
-        alert(res.data);
+        sessionStorage.setItem("id", id);
+        alert('로그인 완료!');
     }).catch((error) => {
-        console.log(error.response.data);
-        alert(error.response.data);
+        if(error.response.status === 400){
+            alert("아이디와 비밀번호를 입력해주세요");
+        }else{
+            alert("로그인 실패");
+        }
     });
 }
