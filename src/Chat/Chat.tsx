@@ -6,6 +6,7 @@ import ChatInput from './ChatInput';
 import { styled } from 'styled-components';
 
 const Chat = () => {
+
   const socket: Socket = io();
   const [messages, setMessages] = useState<string[]>([]);
 

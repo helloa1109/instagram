@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const handleSignUp = async (id:string , pw:string, name:string) => {
 
-    const res = await axios({
+    await axios({
         method: 'POST',
         url: 'http://localhost:8080/signup',
         data: { id, pw, name },
