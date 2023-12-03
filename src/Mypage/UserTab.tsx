@@ -1,16 +1,30 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { styled } from 'styled-components'
+import ChangeModal from './ChangeModal';
 
 const UserTab = () => {
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
     return (
         <TabContainer>
-            <TabChangeInfo className='Tab'>
+            <TabChangeInfo className='Tab' onClick={openModal}>
                 프로필 편집
             </TabChangeInfo>
 
             <TabShareInfo className='Tab'>
                 프로필 공유
             </TabShareInfo>
+
+            {isModalOpen && <ChangeModal onClose={closeModal} />}
         </TabContainer>
     )
 }

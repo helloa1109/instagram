@@ -7,7 +7,7 @@ export const UserChange = styled.div`
 `;
 
 export const UserNick = styled.div`
-  width: 30px;
+  width: 300px;
   margin-top: 14px;
   font-weight: 600;
   font-size: 12px;

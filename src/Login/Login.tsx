@@ -1,7 +1,6 @@
 import React from 'react'
 import { styled } from 'styled-components'
 import logo from "../photo/instagram_logo.png";
-import LoginBack from './LoginBack';
 import LoginDownLoad from './LoginDownLoad';
 import LoginGoSignUp from './LoginGoSignUp';
 import LoginInputFiled from './LoginInputFiled';
@@ -10,7 +9,6 @@ const Login = () => {
 
     return (
         <LoginDiv>
-            <LoginBack/>
             <LoginLogo src={logo} />
             <LoginInputFiled/>
             <LoginGoSignUp/>

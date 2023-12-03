@@ -69,6 +69,26 @@ app.post('/login', async (req, res) => {
     }
 });
 
+// 회원정보 출력
+app.get('/user/:id', async (req, res) => {
+    const userId = req.params.id;
+
+    try {
+        const user = await db.collection('member').findOne({ id: userId });
+
+        if (!user) {
+            return res.status(404).json('사용자를 찾을 수 없습니다.');
+        }
+
+        const { id, name } = user;
+        return res.status(200).json({ id, name });
+    } catch (err) {
+        console.log(err);
+        return res.status(500).json('에러 발생');
+    }
+});
+
+
 //채팅
 io.on('connection', (socket) => {
     console.log("연결");

@@ -2,6 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components';
 import back from "../photo/Back.png";
+
 const LoginBack = () => {
 
     const navigate = useNavigate();
@@ -18,13 +19,14 @@ const LoginBack = () => {
 }
 
 const LoginBackContainer = styled.div`
-    padding-top: 20px;
+    margin-top: 20px;
     display: flex;
     align-items: start;
     justify-content: flex-start;
     cursor: pointer;
     object-fit: cover;
-    width: 74%;
+    width: 100%;
+    padding-left: 20px;
 `;
 
 const LoginBackImg = styled.img`
