@@ -5,6 +5,7 @@ import Login from './Login/Login';
 import Mypage from './Mypage/Mypage';
 import Chat from './Chat/Chat';
 import SignUp from './SignUp/SignUp';
+import Bottom from './BottomMenu/Bottom';
 
 function App() {
   
@@ -19,6 +20,7 @@ function App() {
           <Route path='/signup' element={<SignUp/>}/>
         </Routes>
       </div>
+      <Bottom/>
     </BrowserRouter>
   );
 }
