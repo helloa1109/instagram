@@ -88,7 +88,6 @@ app.get('/user/:id', async (req, res) => {
     }
 });
 
-
 //채팅
 io.on('connection', (socket) => {
     console.log("연결");

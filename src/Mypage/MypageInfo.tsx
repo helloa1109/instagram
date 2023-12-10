@@ -10,17 +10,17 @@ const MypageInfo = () => {
 
             <div className={style.follow}>
                 <div className={style.followContainer}>
-                    <span>41</span>
+                    <span>4</span>
                     <span>게시물</span>
                 </div>
 
                 <div className={style.followContainer}>
-                    <span>41</span>
+                    <span>33</span>
                     <span>팔로워</span>
                 </div>
 
                 <div className={style.followContainer}>
-                    <span>41</span>
+                    <span>2</span>
                     <span>팔로잉</span>
                 </div>
             </div>

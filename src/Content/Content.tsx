@@ -10,6 +10,7 @@ const Content = () => {
   const userNicknames = ['이상혁', '리더', '판다', '다람쥐', '징동', '페이커'];
   const userStories = [p3, p2, p1, p2, p2, p2, p2];
   const userContnet = [test, test, test, test, test,test];
+
   return (
     <div>
       {userNicknames.map((nickname, index) => (
@@ -58,6 +59,7 @@ const ContentUser = styled.div`
   justify-content: space-between;
   padding: 10px;
   margin-left: 4px;
+  
   .MoreIcon{
     margin-right: 10px;
     cursor: pointer;

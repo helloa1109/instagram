@@ -3,10 +3,14 @@ import * as input from "../Login/LoginInput";
 import { handleLoginApi } from "../Apis/LoginApi";
 import { styled } from 'styled-components';
 import { useNavigate } from 'react-router-dom';
+import { useSetRecoilState } from 'recoil';
+import { LoginState } from '../Recoil/LoginAtom';
 
 const LoginInputFiled = () => {
     const [id, setId] = useState('');
     const [pw, setPw] = useState('');
+
+    const setLoginState = useSetRecoilState(LoginState);
 
     const navigate = useNavigate();
 
@@ -28,7 +32,8 @@ const LoginInputFiled = () => {
 
         try {
             await handleLoginApi(id, pw);
-            navigate("/");
+            setLoginState(true);
+            navigate("/main");
         } catch (error) {
             console.error(error);
             alert("다시 입력해주세요");

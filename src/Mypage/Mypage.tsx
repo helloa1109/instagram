@@ -18,6 +18,7 @@ const Mypage = () => {
       try {
         const data = await getUserData();
         setUserInfo(data);
+        console.log(userInfo);
       } catch (error) {
         console.error(error);
       }
@@ -42,4 +43,4 @@ const Mypage = () => {
   )
 }
 
-export default Mypage
+export default Mypage;

@@ -12,9 +12,9 @@ const TabList = ({ tab }: TabListProps) => {
 
   return (
     <Tab>
-      {tab === 0 ? <UserPost /> : null}
-      {tab === 1 ? <UserReels /> : null}
-      {tab === 2 ? <UserShare /> : null}
+      {tab === 0 && <UserPost /> }
+      {tab === 1 && <UserReels />}
+      {tab === 2 && <UserShare />}
     </Tab>
   );
 }
