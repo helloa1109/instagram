@@ -88,6 +88,11 @@ app.get('/user/:id', async (req, res) => {
     }
 });
 
+// 게시물작성
+app.post('/post' , async (req, res) => {
+    
+})
+
 //채팅
 io.on('connection', (socket) => {
     console.log("연결");

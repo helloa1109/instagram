@@ -25,7 +25,7 @@ const Mypage = () => {
     };
 
     fetchData();
-  }, []);
+  }, [userInfo]);
 
 
   return (

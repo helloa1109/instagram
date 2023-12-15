@@ -22,7 +22,7 @@ const LoginInputFiled = () => {
         setPw(e.target.value);
     };
 
-    const handleLogin = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    const handleLogin = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent> | React.TouchEvent<HTMLButtonElement>) => {
         e.preventDefault();
 
         if (!id || !pw) {

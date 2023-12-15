@@ -1,12 +1,22 @@
 import { faHouse, faPlus, faSearch, faUser, faVideo } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { styled } from 'styled-components'
+import PostModal from './PostModal';
 
 const Bottom = () => {
 
     const navigate = useNavigate();
+    const [isOpen, setIsOpen] = useState(false);
+
+    const openModal = () => {
+        setIsOpen(true);
+    }
+
+    const closeModal = () => {
+        setIsOpen(false);
+    }
 
     const handleHome = () => {
         navigate("/");
@@ -16,7 +26,7 @@ const Bottom = () => {
         if(sessionStorage.getItem("id")){
             navigate("/mypage");
         }else{
-            navigate("/login");
+            navigate("/");
         }
     }
     return (
@@ -25,9 +35,11 @@ const Bottom = () => {
                 <BottomMenu>
                     <HomeIcon onClick={handleHome} icon={faHouse} className='BottomIcon' />
                     <CloseIcon icon={faSearch} className='BottomIcon' />
-                    <CloseIcon icon={faPlus} className='BottomIcon' />
+                    <CloseIcon icon={faPlus} className='BottomIcon' onClick={openModal}/>
                     <CloseIcon icon={faVideo} className='BottomIcon' />
                     <CloseIcon onClick={handleLogin} icon={faUser} className='BottomIcon' />
+
+                    {isOpen && <PostModal onClose={closeModal}/>}
                 </BottomMenu>
             </BottomDiv>
         </BottomCenter>
